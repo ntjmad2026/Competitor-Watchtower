@@ -60,6 +60,8 @@ A browser window will ask you to log in to Claude. After you approve, Terminal p
 
 You'll receive the project as a folder (or a zip — double-click to unzip). Put it anywhere you like, such as your Desktop.
 
+*Comfortable with git? You can clone it instead:* `git clone https://github.com/ntjmad2026/Competitor-Watchtower.git`
+
 **Step 2 — Double-click `Start Watchtower.command`**
 
 The first time, macOS may say the file is from an "unidentified developer" — right-click the file → **Open** → **Open**. You only do this once.
