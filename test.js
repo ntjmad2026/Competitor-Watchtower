@@ -171,6 +171,7 @@ ok(/SEARCH BUDGET \(hard limit\): at most 3 web searches TOTAL/.test(HTML), 'the
 ok(/maxTurns: wantsWebSearch \? 12 : 2/.test(SRV), 'web-search calls are capped at 12 turns — a wandering call cannot run 15+ searches (the 437s runaway)');
 ok(/options\.abortController = ac/.test(SRV) && /230000/.test(SRV), 'every call has a 230s server-side abort — the SDK cannot keep working a request the browser already abandoned');
 ok(/this scan: '\+fmtClock/.test(HTML), 'the finished briefing pins the real scan duration next to the time estimate in the banner');
+ok(!/verifyToggle|verifyOn\(/.test(HTML), 'the Verify Sources toggle is gone — source verification always runs (trust labels are not optional)');
 ok(/call #\$\{id\} started/.test(SRV) && /finished in/.test(SRV), 'the server terminal narrates each API call with its duration');
 
 // ── 3e. MODEL-ASSIGNMENT GUARDS — deliberate speed tuning (July 2026). Verification
@@ -199,10 +200,15 @@ const ctx = ctxWin.NT_CONTEXT || '';
 ok(ctx.length > 2000, 'NT_CONTEXT is populated');
 ok(/NOT an autonomous|NOT an agentic|not an? (autonomous|agentic)/i.test(ctx), 'Nina is explicitly NOT an autonomous/agentic auto-trader');
 ok(/Tradovate[\s\S]{0,80}(part of NT|owned by|NOT a competitor)/i.test(ctx), 'Tradovate is flagged as owned by NT, never a competitor');
-ok(/ROADMAP/i.test(ctx) && /LIVE/i.test(ctx), 'context distinguishes LIVE from ROADMAP');
+ok(/durably LIVE/i.test(ctx) && /in-flight/i.test(ctx), 'context distinguishes durably-LIVE capabilities from in-flight work');
 ok(/futures-first/i.test(ctx), 'the futures-first strategic lens is present');
-ok(/Single Stock Futures|SSF/.test(ctx), 'the active SSF launch is covered');
-ok(/LAST REFRESHED/.test(ctxSrc), 'the file carries a LAST REFRESHED date (refresh discipline)');
+ok(/Single Stock Futures|SSF/i.test(ctx), 'the SSF product initiative is covered');
+ok(/LAST (REFRESHED|IDENTITY REVIEW)/.test(ctxSrc), 'the file carries a review/refresh stamp');
+// Evergreen guards — the context is DESIGNED to contain nothing that can rot into a
+// false claim. These fail if someone reintroduces datable specifics.
+ok(/never assert NT-side dates/i.test(ctx), 'the no-NT-dates instruction is present (model must hedge in-flight status, not assert it)');
+ok(!/\b(January|February|March|April|June|July|August|September|October|November|December)\b/.test(ctx), 'evergreen: no month-dated claims in the context body');
+ok(!/\bQ[1-4][\s-]?20\d\d\b/.test(ctx), 'evergreen: no quarter-dated claims in the context body');
 
 // ── summary ──────────────────────────────────────────────────────────────────
 function report() {

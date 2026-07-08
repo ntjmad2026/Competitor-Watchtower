@@ -106,7 +106,7 @@ http://localhost:8787
 
 **To reopen a past briefing:** Click the history icon in the top right corner of the dashboard and select any previous scan. Past briefings reload instantly with no AI calls needed.
 
-**Verify Sources toggle:** On by default. This runs a second pass to check each finding against its original source before surfacing it. Turn it off for a faster scan (~3–4 minutes) when you just need a quick directional read.
+**Source verification** runs automatically on every briefing — a second pass checks each finding against a fresh search before it appears. Anything that can't be confirmed is labeled "unverified" so you always know how much to trust a claim.
 
 **Step 4 — Stop the server when done**
 
