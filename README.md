@@ -64,7 +64,12 @@ You'll receive the project as a folder (or a zip — double-click to unzip). Put
 
 **Step 2 — Double-click `Start Watchtower.command`**
 
-The first time, macOS may say the file is from an "unidentified developer" — right-click the file → **Open** → **Open**. You only do this once.
+The first time, macOS will warn that it "could not verify" the file — that's normal for anything downloaded from the internet. The 30-second fix, once only:
+
+1. Click **Done** on the warning (not "Move to Trash")
+2. Open **System Settings → Privacy & Security**, scroll down to the Security section
+3. Next to *"Start Watchtower.command" was blocked*, click **Open Anyway** and confirm
+4. Double-click the file again — it runs, and macOS never asks about it again
 
 The launcher takes it from there:
 - If Node.js (the engine the server runs on) is missing, it opens the download page and tells you exactly what to click — install it, then double-click the launcher again.
@@ -127,8 +132,8 @@ The most common cause is a slow web search that timed out. Run the briefing agai
 **"Auth error" or the setup page appears again**
 Your saved token is missing or no longer valid. Get a fresh one with `claude setup-token`, then paste it at `http://localhost:8787/setup`. (The token lives in a hidden `.env` file in the project folder — the setup page manages it for you.)
 
-**macOS says the project is from an "unidentified developer"**
-This can happen with command files on Mac. Right click the file → **Open** → **Open**. You only need to do this once.
+**macOS says it "could not verify" the file / blocks it as possible malware**
+This always happens on the first open of a downloaded copy — it's macOS being cautious about internet downloads, not a problem with the tool. Click **Done**, then go to **System Settings → Privacy & Security**, scroll to the Security section, click **Open Anyway** next to the blocked-file message, and double-click the launcher again. One time only. (On older versions of macOS, right-clicking the file and choosing **Open** works instead.)
 
 ---
 
