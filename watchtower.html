@@ -35,17 +35,11 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:15px;l
 .mast-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:16px}
 .brand-logo{width:38px;height:23px;flex-shrink:0}
-.brand-text .kicker{font-family:var(--fm);font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--tx3);margin-bottom:5px}
 .brand-title{font-family:var(--fh);font-size:36px;line-height:.94;letter-spacing:-.025em;color:var(--tx);white-space:nowrap}
 .mast-right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:7px;padding-top:2px}
-.live{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--acc);position:relative}
-.live-dot::after{content:'';position:absolute;inset:0;border-radius:50%;background:var(--acc);animation:pulse 1.8s ease-out infinite}
-@keyframes pulse{0%{transform:scale(.6);opacity:.7}100%{transform:scale(1.6);opacity:0}}
 .mast-date{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--tx2)}
 .mast-date b{color:var(--tx)}
-.mast-rule{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:20px;padding:9px 0;border-top:1px solid var(--b2);border-bottom:1px solid var(--b2);font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);flex-wrap:wrap}
-.mast-rule .edition{color:var(--acc);font-weight:600;letter-spacing:.14em;white-space:nowrap}
+.mast-rule{display:flex;align-items:center;justify-content:flex-end;gap:18px;margin-top:20px;padding:9px 0;border-top:1px solid var(--b2);border-bottom:1px solid var(--b2);font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);flex-wrap:wrap}
 .mast-rule .scope{color:var(--tx2)}
 
 /* ── CONTROL BAR (sticky) ── */
@@ -88,6 +82,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:15px;l
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .ticker-main{font-family:var(--fb);font-size:14px;color:var(--tx);font-weight:500}
 .ticker-sub{font-family:var(--fm);font-size:10px;color:var(--tx2);margin-top:2px;letter-spacing:.03em}
+.ticker-elapsed{margin-left:auto;padding-left:12px;font-family:var(--fm);font-size:11px;color:var(--tx3);white-space:nowrap;font-variant-numeric:tabular-nums}
 
 .err{background:rgba(200,54,42,.06);border:1px solid var(--accb);border-left:3px solid var(--red);border-radius:var(--r);padding:14px 18px}
 .scan-log{background:var(--sf);border:1px solid var(--b1);border-left:3px solid var(--amber);border-radius:var(--r)}
@@ -152,6 +147,11 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:15px;l
 .lead-photo .meta .tag{color:#fff;font-weight:600}
 .lead-photo .meta .date{margin-left:auto;color:rgba(255,255,255,.62)}
 .lead-photo h3{font-family:var(--fh);font-size:21px;line-height:1.1;letter-spacing:-.01em;color:#fff;margin-bottom:9px;position:relative}
+.lead-photo h3 a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.45)}
+.lead-photo h3 a:hover{border-color:#fff}
+.lead-src{margin-top:10px;position:relative}
+.lead-src a{font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4)}
+.lead-src a:hover{color:#fff;border-color:#fff}
 .lead-photo p{font-family:var(--fb);font-size:14px;line-height:1.5;color:rgba(255,255,255,.9);position:relative}
 .lead-photo.empty{background:var(--s3);color:var(--tx2)}
 .lead-photo.empty h3,.lead-photo.empty p{color:var(--tx2)}
@@ -223,6 +223,8 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:15px;l
 .move-body{padding:16px 20px}
 .move-tag{font-family:var(--fm);font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}
 .move-headline{font-family:var(--fh);font-size:18px;color:var(--tx);line-height:1.25;margin-bottom:6px;letter-spacing:-.01em}
+.move-headline a{color:var(--tx);text-decoration:none;border-bottom:1px solid var(--b2)}
+.move-headline a:hover{color:var(--acc);border-color:var(--acc)}
 .move-detail{font-family:var(--fb);font-size:14px;color:var(--tx2);line-height:1.6}
 
 /* ── COMPETITOR CARDS ── */
@@ -267,6 +269,8 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:15px;l
 .launch-item:last-child{margin-bottom:0}
 .launch-tt{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
 .launch-name{font-family:var(--fb);font-size:14px;font-weight:600;color:var(--tx)}
+.launch-name a{color:var(--tx);text-decoration:none;border-bottom:1px solid var(--b2)}
+.launch-name a:hover{color:var(--acc);border-color:var(--acc)}
 .launch-date{font-family:var(--fm);font-size:9px;color:var(--tx3);flex-shrink:0}
 .launch-sum{font-family:var(--fb);font-size:13px;color:var(--tx2);line-height:1.5}
 .launch-sig{font-family:var(--fb);font-size:12.5px;color:var(--blue);margin-top:5px;line-height:1.45}
@@ -386,18 +390,15 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:15px;l
           <polygon fill="var(--acc)" points="345.6,259 345.6,86.4 432,86.4 432,0 172.8,0 172.8,86.4 259.3,86.4 259.3,172.6 86.4,0 0,0 0,86.4 86.4,172.7 0,172.7 0,259 86.4,259 86.4,172.7 172.7,259"/>
         </svg>
         <div class="brand-text">
-          <div class="kicker">NinjaTrader Competitive Intelligence</div>
           <div class="brand-title">The Competitor Watchtower</div>
         </div>
       </div>
       <div class="mast-right">
-        <span class="live"><span class="live-dot"></span> Live web search</span>
         <span class="mast-date" id="dateline">Competitive Intelligence Briefing</span>
       </div>
     </div>
     <div class="mast-rule">
-      <span class="edition">NinjaTrader · PMM Edition</span>
-      <span class="scope">Tracking — Positioning · Feature launches · Website messaging</span>
+      <span class="scope">Tracking — Biggest Moves · Website Messaging Watch · Feature &amp; Platform Launches</span>
     </div>
   </div>
 </header>
@@ -430,6 +431,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:15px;l
       <div class="ticker-main" id="tickerMain">Starting…</div>
       <div class="ticker-sub" id="tickerSub"></div>
     </div>
+    <div class="ticker-elapsed" id="tickerElapsed"></div>
   </div>
 
   <div class="err" id="errEl" style="display:none">
@@ -444,7 +446,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:15px;l
       </svg>
     </div>
     <div class="idle-h">Ready to file the briefing</div>
-    <div class="idle-p">Pick a business unit, then run the briefing. Claude reads each competitor across the open web — grounded in NinjaTrader's actual product lineup — and reports three things that matter for PMM: how they're <em>positioning</em>, what they've <em>launched</em>, and how their <em>website messaging</em> is shifting. Then it files a TL;DR, do-this-week action items, and the biggest moves of the week.</div>
+    <div class="idle-p">Pick a business unit, then run the briefing. Claude reads each competitor across the open web — grounded in NinjaTrader's actual product lineup — and reports three things that matter: how they're <em>positioning</em>, what they've <em>launched</em>, and how their <em>website messaging</em> is shifting. Then it files a TL;DR, do-this-week action items, and the biggest moves of the week.</div>
     <div class="idle-tags">
       <div class="idle-tag">Positioning moves</div>
       <div class="idle-tag">Feature &amp; launch alerts</div>
@@ -479,7 +481,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:15px;l
 
   <div class="scope-note" id="scopeNote" style="display:none">
     <strong>MVP scope</strong><br>
-    This briefing is focused on three insight types — competitor positioning moves, feature/platform launches, and website-messaging shifts — across D2C Core, International, and Eval/Prop. Every comparison is grounded in NinjaTrader's actual product lineup (SSF, Nina AI coaching/insights assistant, SuperDOM, Order Flow+/Trader+, NinjaScript, the Mar-2026 account Dashboard, Arena, Account-Level Lockout, Trade Copier). Keyword ranking and brand-sentiment tracking are handled by existing search and social-listening tools and are out of scope here. Growth/Trader Engagement competitors are folded into D2C Core. NT Connect is out of the initial scope. Eval/Prop competitor set is pending review with the BU PMM.
+    This briefing is focused on three insight types — competitor positioning moves, feature/platform launches, and website-messaging shifts — across D2C Core, International, and Eval/Prop. Every comparison is grounded in NinjaTrader's actual product lineup (SSF, Nina AI coaching/insights assistant, SuperDOM, Order Flow+/Trader+, NinjaScript, the Mar-2026 account Dashboard, Arena, Account-Level Lockout, Trade Copier). Growth/Trader Engagement competitors are folded into D2C Core. NT Connect is out of the initial scope. Eval/Prop competitor set is pending review with the business unit's marketing lead.
   </div>
 
   <div class="scan-log" id="scanLog" style="display:none">
@@ -802,6 +804,7 @@ function buildProg(comps){
 function pcGo(c){const e=el(`pc_${slug(c)}`);if(e)e.className='pc pc-go';const s=el(`pcs_${slug(c)}`);if(s)s.textContent='Reading positioning & launches…';}
 function pcDone(c){const e=el(`pc_${slug(c)}`);if(e)e.className='pc pc-ok';const s=el(`pcs_${slug(c)}`);if(s)s.textContent='✓ Filed';}
 function pcFail(c,m){const e=el(`pc_${slug(c)}`);if(e)e.className='pc pc-err';const s=el(`pcs_${slug(c)}`);if(s)s.textContent='✗ '+(m||'').slice(0,40);}
+function pcStatus(c,txt){const s=el(`pcs_${slug(c)}`);if(s)s.textContent=txt;}
 
 function hideErr(){H('errEl');}
 function renderScanLog(errors){
@@ -939,18 +942,28 @@ CRITICAL OUTPUT RULE: respond with ONLY the JSON below. Start with { and end wit
 STRICT LIMITS: messaging max 3.
 {"messaging":[{"signal":"the message/theme on their site (quote phrasing if possible)","read":"under 14 words on what it tells us","url":"site url or empty","futures_relevance":"high|medium|low"}]}
 Use [] for empty arrays. Escape inner double-quotes as \\".`;
-  const data=await apiCall({model:'claude-sonnet-4-6',max_tokens:600,system:RESEARCH_SYS,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:prompt}]},210000);
+  // Haiku by design: messaging is the simplest extraction (1-3 dateless quotes from the
+  // live homepage — no date discipline, no scoring). It is also the call that historically
+  // lost the 9-way concurrency race and blanked out; the faster model shrinks that window.
+  const data=await apiCall({model:'claude-haiku-4-5-20251001',max_tokens:600,system:RESEARCH_SYS,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:prompt}]},210000);
   return safeJSON(getText(data),{messaging:[]});
 }
 
 async function research(comp,bu){
   pcGo(comp); await raf();
+  // Live per-step progress: each research call can run for minutes, so flip that
+  // category's mark on the competitor card the moment its call settles — the card
+  // visibly moves instead of sitting frozen on one status line.
+  const steps={'Positioning':'⋯','Launches':'⋯','Messaging':'⋯'};
+  const paint=()=>pcStatus(comp,Object.entries(steps).map(([k,v])=>`${k} ${v}`).join(' · '));
+  paint();
+  const track=(p,k)=>p.then(v=>{steps[k]='✓';paint();return v;},e=>{steps[k]='✗';paint();throw e;});
   // Fire all 3 category searches in parallel — each does exactly 1 search instead
   // of the old single call that chained 3 searches sequentially.
   const [pos,lnc,msg]=await Promise.allSettled([
-    researchPositioning(comp,bu),
-    researchLaunches(comp,bu),
-    researchMessaging(comp,bu),
+    track(researchPositioning(comp,bu),'Positioning'),
+    track(researchLaunches(comp,bu),'Launches'),
+    track(researchMessaging(comp,bu),'Messaging'),
   ]);
   const p=pos.status==='fulfilled'?pos.value:{};
   const l=lnc.status==='fulfilled'?lnc.value:{};
@@ -969,13 +982,20 @@ async function research(comp,bu){
 // VERIFY — fresh-context fact-checker, one pass per competitor (re-search to corroborate)
 // ─────────────────────────────────────────────
 const VERIFIER_SYS=ANALYST_FRAMEWORK+' Your "Needs Verification" judgment maps to the "unverified" status defined below. You are a fact-checker with NO prior knowledge of how these claims were produced. You receive competitive-intelligence claims about one company, each with a cited source URL. Decide whether each claim is supported. You cannot open the exact cited page — use web_search to corroborate the claim, the named product/feature, and the date. Statuses: "verified" (search clearly supports the claim as stated, including any shipped/live implication and the date), "contradicted" (search shows the thing is planned/announced/in beta rather than shipped, the date is materially wrong, the product/feature differs, or a superlative like "first"/"only" is unsupported), "unverified" (cannot confirm or deny). Be strict on shipped-vs-announced and superlatives; when genuinely torn between verified and contradicted, choose unverified. Output ONLY the requested JSON — start with { and end with }, no preamble, no backticks. Escape inner double-quotes as \\".';
-// Fact-check ONE category's claims in a single call (≤3 claims → ≤3 sequential
-// searches, so it stays well under the timeout). Mutates each card's _v/_vnote.
+// Fact-check ONE category's claims in a single call. Categories can carry up to 5
+// claims, so the prompt enforces a hard 3-search budget — one broad company sweep
+// covers most claims, targeted follow-ups only where needed. Without the budget a
+// call runs 5 sequential searches and slams into the 120s timeout (fail-open, items
+// left unflagged) — which is a wall-clock cost AND a quiet loss of trust labels.
 async function verifyGroup(entity,items,toClaim,scope,timeout){
   if(!items.length) return;
   const cards=items.map((it,i)=>({id:'c'+i,claim:toClaim(it),url:it.url||''}));
-  const prompt=`Fact-check these claims about ${entity}. For each, use web_search to confirm or deny whether the claim is true as stated (you cannot open the cited URL directly).\n\n${JSON.stringify(cards)}${scope}\n\nReturn ONLY: {"verdicts":[{"id":"c0","status":"verified|unverified|contradicted","note":"under 15 words"}]}`;
-  const data=await apiCall({model:'claude-sonnet-4-6',max_tokens:900,system:VERIFIER_SYS,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:prompt}]},timeout);
+  const prompt=`Fact-check these claims about ${entity}. Use web_search to confirm or deny each claim as stated (you cannot open the cited URL directly).\n\nSEARCH BUDGET (hard limit): at most 3 web searches TOTAL for all claims combined. Every claim is about ${entity}, so start with ONE broad search (company name + newsroom/announcement keywords) and judge as many claims as possible from it; spend the remaining searches only on claims that broad pass could not settle. If the budget is spent and a claim is still unclear, mark it "unverified" — do not keep searching.\n\n${JSON.stringify(cards)}${scope}\n\nReturn ONLY: {"verdicts":[{"id":"c0","status":"verified|unverified|contradicted","note":"under 15 words"}]}`;
+  // Haiku by design: verification is the narrowest task in the pipeline (corroborate a
+  // claim, emit a verdict, choose "unverified" when torn) and runs 10× per 5-comp scan —
+  // the fast model here cuts ~1-1.5 min of wall-clock with the fail-open design absorbing
+  // any lost nuance (a soft verdict just shows a badge; contradicted needs positive proof).
+  const data=await apiCall({model:'claude-haiku-4-5-20251001',max_tokens:900,system:VERIFIER_SYS,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:prompt}]},timeout);
   const parsed=safeJSON(getText(data),{verdicts:[]});
   const byId={}; (parsed.verdicts||[]).forEach(v=>{ if(v&&v.id) byId[v.id]=v; });
   items.forEach((it,i)=>{ const v=byId['c'+i]||{status:'unverified',note:'no verdict returned'}; let st=v.status; if(st!=='verified'&&st!=='contradicted') st='unverified'; it._v=st; it._vnote=v.note||''; });
@@ -1014,9 +1034,9 @@ async function synthesize(results,bu){
   const summary=results.map(r=>({
     name:r.competitor,
     momentum:r.momentum,
-    positioning:(r.positioning_moves||[]).filter(m=>recencyTier(m.date)==='recent').map(m=>`${vt(m)}[${m.kind||'move'}] ${m.title} (${m.date||'undated'}) — ${m.summary} {fut:${m.futures_relevance||'?'} sig:${m.significance||'?'}}`).join(' | ')||'none found',
-    launches:(r.launches||[]).filter(l=>recencyTier(l.date)==='recent').map(l=>`${vt(l)}${l.name} (${l.date||'undated'}): ${l.summary}${l.why?' ('+l.why+')':''} {fut:${l.futures_relevance||'?'} sig:${l.significance_score||'?'}}`).join(' | ')||'none found',
-    website_messaging:(r.messaging||[]).map(m=>`${vt(m)}${m.signal} — ${m.read} {fut:${m.futures_relevance||'?'}}`).join(' | ')||'none found',
+    positioning:(r.positioning_moves||[]).filter(m=>recencyTier(m.date)==='recent').map(m=>`${vt(m)}[${m.kind||'move'}] ${m.title} (${m.date||'undated'}) — ${m.summary} {fut:${m.futures_relevance||'?'} sig:${m.significance||'?'}}${m.url?' src:'+m.url:''}`).join(' | ')||'none found',
+    launches:(r.launches||[]).filter(l=>recencyTier(l.date)==='recent').map(l=>`${vt(l)}${l.name} (${l.date||'undated'}): ${l.summary}${l.why?' ('+l.why+')':''} {fut:${l.futures_relevance||'?'} sig:${l.significance_score||'?'}}${l.url?' src:'+l.url:''}`).join(' | ')||'none found',
+    website_messaging:(r.messaging||[]).map(m=>`${vt(m)}${m.signal} — ${m.read} {fut:${m.futures_relevance||'?'}}${m.url?' src:'+m.url:''}`).join(' | ')||'none found',
     headline:r.summary||''
   }));
   const prompt=`You are a senior product marketing strategist for NinjaTrader, filing a competitive briefing for the PMM team.
@@ -1033,7 +1053,7 @@ Fresh intelligence gathered just now (dates included — respect them). HARD REC
 ${JSON.stringify(summary,null,2)}
 
 VERIFICATION: signals marked "[unverified]" could not be confirmed against a source by the fact-checker. Prefer verified signals for every section. Use an [unverified] signal only if important and you have no verified alternative — and if you do, append " (unverified)" to that claim so the reader knows. Contradicted signals were already removed; never reintroduce a claim you were not given.
-NAMES RULE: never name individuals. Refer to teams/roles only (the PMM team, the content team, the paid team, the lifecycle team).
+NAMES RULE: never name individuals. Refer to teams/roles only (the product marketing team, the content team, the paid team, the lifecycle team). Write "product marketing", never the abbreviation "PMM", anywhere in your output.
 STYLE RULE (house style — applies to every string you output): write in plain prose with NO em dashes (—) and NO en dashes (–) anywhere. Use a period, comma, colon, or the word "and" instead. Use numerals for quantities. Lead with the point; no filler.
 COMPARISON ACCURACY: every comparison to NinjaTrader must use the real NT capabilities described above. Do NOT invent NT features, and do NOT force a false parallel (e.g. do not equate NT's Nina coaching assistant with a competitor's agentic auto-trading). Where a competitor has something NT lacks, name the gap honestly and frame the opportunity.
 FUTURES WEIGHTING (critical — NinjaTrader is a futures-first brokerage): each signal carries a {fut:high|medium|low} tag for how much it touches futures, options-on-futures, or prop/eval-funded futures. Rank and prioritize by it — a {fut:high} move outranks a flashier {fut:low} one. The VERDICT, every competitor's THREAT level, THE BRIEF, BIGGEST MOVES, and the RECOMMENDATIONS must lead with futures-relevant signals. Surface a {fut:low} signal (equities-only, crypto-only, or general investing) only when it is genuinely major — and when you do, note how it bears on futures or flag it as adjacent. Do not let a noisy non-futures competitor outrank a quieter one making real futures moves.
@@ -1041,13 +1061,13 @@ FUTURES WEIGHTING (critical — NinjaTrader is a futures-first brokerage): each 
 TONE RULE FOR RECOMMENDATIONS (important): you are advising a strong company — write to inform the team's judgment, NOT to issue orders, and NOT as a doomsayer. NinjaTrader is a category leader for serious traders. Two things to get right. (1) NOT doom: recommendations seize an opportunity or sharpen positioning, never survival warnings. BANNED: "or we lose our customer base", "NinjaTrader will fall behind / lose / go bankrupt", "before it's too late", existential threats, fear. (2) NOT directive: frame each recommendation as decision support, not a command. Surface the lever, the upside it could unlock, and the condition or tradeoff that matters — then let the reader make the call. Prefer phrasings like "Worth weighing …, which could …", "There's a case for … given …", "One option: … — stronger if …" over bare imperatives like "Launch X", "Do Y", "Run Z". Advisory does NOT mean vague: stay concrete and tied to a real signal.
 
 TASK 1 — VERDICT (internal read, kept measured): set "verdict" to exactly one of "winning","holding","at_risk","losing" based on positioning + launches + messaging this period. One-line "verdict_reason" (≤16 words), factual not alarmist. Name the single "top_threat" competitor + "top_threat_reason" (≤14 words). For each competitor assign threat: "high" (actively taking ground), "medium" (real pressure), "low" (not a current threat) with a ≤6-word reason.
-TASK 2 — THE BRIEF: 3 punchy bullets (each ≤14 words) on the most important competitive signals this period (include any notable website-messaging shift). INLINE LINK (required): in EACH bullet, wrap the single most relevant phrase — words already in the sentence, normally the real product/feature/campaign name — in a marker [[section|phrase]] so the UI can turn it into an inline jump-link to the matching detail section. "section" MUST be exactly one of: moves (Biggest Moves), launches (Feature & Platform Launches), messaging (Website Messaging). Exactly one marker per bullet; the phrase reads naturally inside the sentence (do NOT add boilerplate like "see detail"); keep the ≤14-word count. Example: "Robinhood opened its [[launches|Agentic Trading beta]], pressuring AI narratives." Then 3 recommendations (each ≤22 words) framed as DECISION SUPPORT — each names a lever, the upside it could unlock, and the condition or tradeoff that matters, so the team can make the call (advisory, not directive — see TONE RULE). Tie each to a specific signal and, where relevant, an active NT launch (e.g. SSF). Example — NOT "Launch an SSF campaign against agentic AI" but "Worth weighing an SSF angle that contrasts trader control with agentic auto-trading — could sharpen differentiation if the beta keeps drawing attention." Recommendations are plain text — NO markers.
+TASK 2 — THE BRIEF: 3 punchy bullets (each ≤14 words) on the most important competitive signals this period (include any notable website-messaging shift). INLINE SOURCE LINK (required): in EACH bullet, wrap the single most relevant phrase — words already in the sentence, normally the real product/feature/campaign name — in a marker [[SOURCE_URL|phrase]] so the UI can turn it into a direct link to the cited source. SOURCE_URL MUST be copied EXACTLY from the "src:" of the specific signal the bullet is about — never invent, shorten, or alter a URL. If the signal you cite has no src:, write the bullet as plain text with NO marker. At most one marker per bullet; the phrase reads naturally inside the sentence (do NOT add boilerplate like "see source"); keep the ≤14-word count (the URL inside the marker does not count toward it). Example: "Robinhood opened its [[https://newsroom.robinhood.com/agentic-beta|Agentic Trading beta]], pressuring AI narratives." Then 3 recommendations (each ≤22 words) framed as DECISION SUPPORT — each names a lever, the upside it could unlock, and the condition or tradeoff that matters, so the team can make the call (advisory, not directive — see TONE RULE). Tie each to a specific signal and, where relevant, an active NT launch (e.g. SSF). Example — NOT "Launch an SSF campaign against agentic AI" but "Worth weighing an SSF angle that contrasts trader control with agentic auto-trading — could sharpen differentiation if the beta keeps drawing attention." Recommendations are plain text — NO markers.
 TASK 3 — ACTION ITEMS: 2-3 concrete, *doable-this-week* action items for the PMM team, each tied to a signal. For each, give a short "label" (≤8 words, imperative — e.g. "Draft SSF vs. agentic-AI positioning note"), an "owner_role" (e.g. PMM, content, paid, lifecycle), and a "generatable" type the tool could draft on request — one of: "slack_update","positioning_note","messaging_angles","email_brief","none".
 TASK 4 — BIGGEST MOVES: the most strategically significant recent moves (the research above is already filtered to the last 4 weeks — use any of it). Rank them, most significant first. Each = competitor + a SPECIFIC headline (≤10 words, name the real product/campaign, no vague phrasing) + the move's real date (echo it) + a 2-sentence detail: sentence 1 = what actually happened, sentence 2 = a move NT could weigh in response, framed as a consideration with its upside (not a directive). Return up to 3. (The tool re-ranks and selects the final lead signal deterministically from the scored items — your job here is accurate, well-written candidate prose for the strongest moves.)
 
 Return ONLY raw JSON, no backticks:
-{"verdict":"holding","verdict_reason":"...","top_threat":"name","top_threat_reason":"...","competitors":[{"name":"...","threat":"high","reason":"6 words max"}],"brief":["signal with [[launches|real feature name]] linked","bullet 2 with [[messaging|phrase]]","bullet 3 with [[moves|phrase]]"],"actions":["recommendation 1","recommendation 2","recommendation 3"],"action_items":[{"label":"≤8 words imperative","owner_role":"PMM","generatable":"slack_update"}],"biggest_moves":[{"rank":1,"competitor":"name","headline":"≤10 words specific","date":"YYYY-MM-DD","detail":"2 sentences: what happened + constructive NT move"}]}`;
-  const data=await apiCall({model:'claude-opus-4-8',max_tokens:12000,system:ANALYST_FRAMEWORK+' In THIS task you output only valid minified JSON. Never write text before { or after }. Skepticism means never inventing a signal or inflating a claim beyond the research provided; express any Needs-Verification case as the (unverified) convention described in the prompt, never as invented detail. Escape all inner double-quotes as \\". Keep strings concise so the JSON completes.',thinking:{type:'enabled',budget_tokens:3000},messages:[{role:'user',content:prompt}]},170000);
+{"verdict":"holding","verdict_reason":"...","top_threat":"name","top_threat_reason":"...","competitors":[{"name":"...","threat":"high","reason":"6 words max"}],"brief":["signal with [[https://source-url-from-src|real feature name]] linked","bullet 2 with [[https://its-src-url|phrase]]","bullet 3 plain text if its signal had no src"],"actions":["recommendation 1","recommendation 2","recommendation 3"],"action_items":[{"label":"≤8 words imperative","owner_role":"PMM","generatable":"slack_update"}],"biggest_moves":[{"rank":1,"competitor":"name","headline":"≤10 words specific","date":"YYYY-MM-DD","detail":"2 sentences: what happened + constructive NT move"}]}`;
+  const data=await apiCall({model:'claude-opus-4-8',max_tokens:12000,system:ANALYST_FRAMEWORK+' In THIS task you output only valid minified JSON. Never write text before { or after }. Skepticism means never inventing a signal or inflating a claim beyond the research provided; express any Needs-Verification case as the (unverified) convention described in the prompt, never as invented detail. Escape all inner double-quotes as \\". Keep strings concise so the JSON completes.',thinking:{type:'enabled',budget_tokens:1500},messages:[{role:'user',content:prompt}]},170000);
   return safeJSON(getText(data),{verdict:null,verdict_reason:'',top_threat:'',top_threat_reason:'',competitors:[],brief:[],actions:[],action_items:[],biggest_moves:[]});
 }
 
@@ -1066,7 +1086,7 @@ async function askQ(){
   const ans=el('askAnswer'); ans.className='askbar-answer show'; ans.innerHTML=`<div class="q">${esc(q)}</div><div style="color:var(--tx3)">Thinking…</div>`;
   const ctx={bu:BUS[lastScan.bu].label,verdict:lastScan.synth,competitors:lastScan.results};
   const prompt=`${ANALYST_FRAMEWORK} If a detail is not in the briefing data below, say so plainly instead of guessing, and never invent numbers.
-You are NinjaTrader's PMM competitive strategist. A teammate is asking about the competitive briefing below. Answer in 2-4 sentences, concrete and specific, grounded ONLY in this briefing data. Never name individuals — refer to teams/roles. Keep a constructive, leader's tone — no doom or "or we lose" framing. Frame any suggestion as advice that aids the decision (surface the lever and its upside), not a directive telling them what to do. If asked to draft something, keep it tight. House style for your answer: plain prose with NO em dashes or en dashes (use periods, commas, or "and"); numerals for quantities.
+You are NinjaTrader's PMM competitive strategist. A teammate is asking about the competitive briefing below. Answer in 2-4 sentences, concrete and specific, grounded ONLY in this briefing data. Never name individuals — refer to teams/roles. Keep a constructive, leader's tone — no doom or "or we lose" framing. Frame any suggestion as advice that aids the decision (surface the lever and its upside), not a directive telling them what to do. If asked to draft something, keep it tight. House style for your answer: plain prose with NO em dashes or en dashes (use periods, commas, or "and"); numerals for quantities; write "product marketing", never the abbreviation "PMM".
 
 ${NT_CONTEXT}
 COMPARISON RULE: any comparison to NinjaTrader must use the real NT capabilities above; never invent NT features or force a false parallel (e.g. Nina is a coaching assistant, not an agentic auto-trader).
@@ -1088,15 +1108,19 @@ QUESTION: ${q}`;
 // RENDER
 // ─────────────────────────────────────────────
 const _ddMap={moves:'dd-moves',move:'dd-moves',biggest:'dd-moves',messaging:'dd-msg',message:'dd-msg',website:'dd-msg',msg:'dd-msg',positioning:'dd-moves',position:'dd-moves',pos:'dd-moves',launches:'dd-launch',launch:'dd-launch'};
-// Turn [[section|phrase]] markers inside a bullet into inline hyperlinks that jump to that detail section.
+// Turn [[url|phrase]] markers inside a bullet into direct links to the cited source.
+// Legacy [[section|phrase]] markers (older saved briefings) still jump to their detail
+// section; any other target renders as plain text — never a dead or unsafe link.
 function linkifyBullet(text){
-  return esc(text).replace(/\[\[\s*([a-z_]+)\s*\|\s*([^\]]+?)\s*\]\]/gi,(m,sec,phrase)=>{
-    const id=_ddMap[sec.toLowerCase()]||'dd-moves';
-    return `<a class="brief-inline-link" onclick="jumpToDD('${id}')">${phrase}</a>`;
+  return esc(text).replace(/\[\[\s*([^|\]]+?)\s*\|\s*([^\]]+?)\s*\]\]/gi,(m,target,phrase)=>{
+    const t=target.trim();
+    if(/^https?:\/\//i.test(t)) return `<a class="brief-inline-link" href="${t.replace(/["']/g,'')}" onclick="xlink(this.href);return false">${phrase}</a>`;
+    const id=_ddMap[t.toLowerCase()];
+    return id?`<a class="brief-inline-link" onclick="jumpToDD('${id}')">${phrase}</a>`:phrase;
   });
 }
-// Strip [[section|phrase]] markers down to just the phrase — used when feeding briefing data into other model calls.
-function stripMarkers(s){ return (s||'').replace(/\[\[\s*[a-z_]+\s*\|\s*([^\]]+?)\s*\]\]/gi,'$1'); }
+// Strip [[target|phrase]] markers down to just the phrase — used when feeding briefing data into other model calls.
+function stripMarkers(s){ return (s||'').replace(/\[\[\s*[^|\]]+?\s*\|\s*([^\]]+?)\s*\]\]/gi,'$1'); }
 function renderBrief(synth,results){
   const b=synth.brief||[], a=synth.actions||[], ai=synth.action_items||[];
   window._actionItems=ai; // referenced by generate handler
@@ -1117,14 +1141,14 @@ function renderBrief(synth,results){
   }else{
     const genLabels={slack_update:'Generate Slack update',positioning_note:'Generate positioning note',messaging_angles:'Generate messaging angles',email_brief:'Generate email brief'};
     const bulletsHTML=b.length?`<div class="lead-bullets">${b.map((x,i)=>`<div class="lead-bullet"><span class="n">0${i+1}</span><p>${linkifyBullet(x)}</p></div>`).join('')}</div>`:'';
-    const recsHTML=a.length?`<div class="recs"><div class="recs-label">Recommended PMM actions</div>${a.slice(0,3).map((x,i)=>`<div class="rec"><span class="k">${i+1}</span><p>${esc(x)}</p></div>`).join('')}</div>`:'';
+    const recsHTML=a.length?`<div class="recs"><div class="recs-label">Recommended actions</div>${a.slice(0,3).map((x,i)=>`<div class="rec"><span class="k">${i+1}</span><p>${esc(x)}</p></div>`).join('')}</div>`:'';
     const actsHTML=ai.length?`<div class="acts-label">Action items · do this week</div>${ai.map((x,i)=>{
         const gen=x.generatable&&x.generatable!=='none'&&genLabels[x.generatable];
         return `<div class="act-item" id="actItem_${i}">
           <div class="act-check" onclick="toggleAct(${i})"></div>
           <div class="act-main">
             <div class="act-label">${esc(x.label||'')}</div>
-            ${x.owner_role?`<div class="act-owner">Owner — ${esc(x.owner_role)}</div>`:''}
+            ${x.owner_role?`<div class="act-owner">Owner — ${esc(String(x.owner_role).trim().toUpperCase()==='PMM'?'Product Marketing':x.owner_role)}</div>`:''}
             <div class="act-output" id="actOut_${i}"></div>
           </div>
           ${gen?`<button class="act-gen" id="actBtn_${i}" onclick="genAction(${i})">${esc(genLabels[x.generatable])}</button>`:''}
@@ -1139,8 +1163,9 @@ function renderBrief(synth,results){
   const photoHTML=lm?`
       <div class="lead-photo">
         <div class="meta"><span class="tag">${esc(lm.competitor)}</span>${spotBadge}<span>Biggest move</span><span class="date">${esc(lm.date||'')}</span></div>
-        <h3>${esc(lm.headline)}</h3>
+        <h3>${lm.url?`<a href="${esc(lm.url)}" onclick="xlink(this.href);return false">${esc(lm.headline)}</a>`:esc(lm.headline)}</h3>
         <p>${esc(lm.detail)}</p>
+        ${lm.url?`<div class="lead-src"><a href="${esc(lm.url)}" onclick="xlink(this.href);return false">View source ↗</a></div>`:''}
       </div>`:`
       <div class="lead-photo empty">
         <div class="meta"><span class="tag">Quiet stretch</span></div>
@@ -1174,7 +1199,7 @@ async function genAction(i){
   if(btn){ btn.disabled=true; btn.textContent='Generating…'; }
   out.className='act-output show'; out.innerHTML='<span style="color:var(--tx3)">Drafting…</span>';
   const kindGuide={
-    slack_update:'a ready-to-paste Slack update for the PMM channel: a one-line headline then 2-4 tight bullets. Plain text, no markdown headers.',
+    slack_update:'a ready-to-paste Slack update for the product marketing team channel: a one-line headline then 2-4 tight bullets. Plain text, no markdown headers.',
     positioning_note:'a short positioning note (4-6 sentences): the competitive signal, NT\'s honest position using only real NT capabilities, and the angle to lean into.',
     messaging_angles:'3 concrete messaging angles NT could test, each one line: the angle + the audience it speaks to. Grounded in a real NT capability.',
     email_brief:'a brief for a lifecycle/email touch: subject line option, audience, the single message, and the CTA. Keep it tight.'
@@ -1185,7 +1210,7 @@ You are NinjaTrader's PMM competitive strategist. Produce ${kindGuide[item.gener
 ACTION ITEM: ${item.label} (owner: ${item.owner_role||'PMM'})
 
 ${NT_CONTEXT}
-RULES: ground everything in the briefing data below and the real NT capabilities above. Never invent NT features or force a false comparison. Never name individuals — use teams/roles. Constructive, confident tone — no doom or "or we lose" framing. House style: plain prose with NO em dashes or en dashes (use periods, commas, or "and"); numerals for quantities. Output only the deliverable, no preamble.
+RULES: ground everything in the briefing data below and the real NT capabilities above. Never invent NT features or force a false comparison. Never name individuals — use teams/roles. Constructive, confident tone — no doom or "or we lose" framing. House style: plain prose with NO em dashes or en dashes (use periods, commas, or "and"); numerals for quantities; write "product marketing", never the abbreviation "PMM". Output only the deliverable, no preamble.
 
 BRIEFING DATA:
 ${stripMarkers(JSON.stringify(ctx,null,2))}`;
@@ -1247,7 +1272,7 @@ function buildDiveDeeper(synth,results){
       <div class="move-num">${x.rank}</div>
       <div class="move-body">
         <div class="move-tag">${esc(x.competitor)}${x.date?`<span class="move-date-inline">${esc(x.date)}</span>`:''}</div>
-        <div class="move-headline">${esc(x.headline)}</div>
+        <div class="move-headline">${x.url?`<a href="${esc(x.url)}" onclick="xlink(this.href);return false">${esc(x.headline)}</a>`:esc(x.headline)}</div>
         <div class="move-detail">${esc(x.detail)}</div>
       </div>
     </div>`).join(''):'<div class="dd-comp"><div class="no-data">No major moves in the last four weeks.</div></div>';
@@ -1255,7 +1280,7 @@ function buildDiveDeeper(synth,results){
     const ls=r.launches||[];
     const lHTML=ls.length?ls.map(l=>`
       <div class="launch-item">
-        <div class="launch-tt"><span class="launch-name">${esc(l.name)}</span>${vbadge(l)}${l.date?`<span class="launch-date">${esc(l.date)}</span>`:''}</div>
+        <div class="launch-tt"><span class="launch-name">${l.url?`<a href="${esc(l.url)}" onclick="xlink(this.href);return false">${esc(l.name)}</a>`:esc(l.name)}</span>${vbadge(l)}${l.date?`<span class="launch-date">${esc(l.date)}</span>`:''}</div>
         ${l.summary?`<div class="launch-sum">${esc(l.summary)}</div>`:''}
         ${l.why?`<div class="launch-sig">Why it matters: ${esc(l.why)}</div>`:''}
       </div>`).join(''):'<div class="no-data">No recent launches detected</div>';
@@ -1387,9 +1412,9 @@ function computeBiggestMoves(results, modelMoves){
   (results||[]).forEach(r=>{
     const comp=r.competitor||r.name;
     (r.positioning_moves||[]).forEach(m=>{ if(m._v!=='contradicted' && dayNum(m.date)>=leadCutoff)
-      pool.push({comp,date:m.date,headline:m.title,detail:m.summary,score:itemScore(m),_v:m._v}); });
+      pool.push({comp,date:m.date,headline:m.title,detail:m.summary,score:itemScore(m),_v:m._v,url:m.url||''}); });
     (r.launches||[]).forEach(l=>{ if(l._v!=='contradicted' && dayNum(l.date)>=leadCutoff)
-      pool.push({comp,date:l.date,headline:l.name,detail:l.why?`${l.summary} ${l.why}`:l.summary,score:itemScore(l),_v:l._v}); });
+      pool.push({comp,date:l.date,headline:l.name,detail:l.why?`${l.summary} ${l.why}`:l.summary,score:itemScore(l),_v:l._v,url:l.url||''}); });
   });
   // Dedup the same event captured in BOTH positioning and launches (same competitor + date +
   // near-identical headline) so one move can't occupy two Biggest-Moves slots / double-count.
@@ -1415,7 +1440,7 @@ function computeBiggestMoves(results, modelMoves){
     used.add(best);
     return (modelMoves[best] && modelMoves[best].detail) || mv.detail;
   };
-  return deduped.slice(0,3).map((mv,i)=>({rank:i+1, competitor:mv.comp, date:mv.date, headline:mv.headline, detail:detailFor(mv), _v:mv._v}));
+  return deduped.slice(0,3).map((mv,i)=>({rank:i+1, competitor:mv.comp, date:mv.date, headline:mv.headline, detail:detailFor(mv), _v:mv._v, url:mv.url||''}));
 }
 // Returns fresh copies: recent dated items stay on their arrays; standing (older but in-window)
 // items are collected into c.standing; anything older is dropped. Messaging has no date (it
@@ -1480,46 +1505,68 @@ async function run(){
   tick('Filing the briefing…','Connecting to Claude'); SF('ticker'); await raf();
   buildProg(comps); await raf();
 
+  // Elapsed clock — a scan runs 5-7 minutes, and a frozen-looking screen reads as a
+  // timeout. Tick once a second so time visibly moves for the entire run.
+  const scanT0=Date.now();
+  const fmtClock=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+  const paintElapsed=()=>{const e=el('tickerElapsed');if(e)e.textContent=fmtClock(Math.floor((Date.now()-scanT0)/1000))+' elapsed · full scan ≈ 5–7 min';};
+  paintElapsed();
+  const elapsedTimer=setInterval(paintElapsed,1000);
+  const stopElapsed=()=>{clearInterval(elapsedTimer);const e=el('tickerElapsed');if(e)e.textContent='';};
+
   tick('Reading competitors…',`Researching ${comps.length} competitors in parallel`); await raf();
   const banner=VERIFY?'Live web search · research + source verification · ~5–7 min':'Live web search · positioning moves & feature launches · ~3–4 min'; el('bannerEl').textContent=banner; SF('bannerEl');
 
-  // Competitors run 3 at a time (see researchLimit below). Each research() fires 3 sub-calls
-  // (positioning + launches + messaging), so peak concurrency ≈ 3 × 3 = 9 API calls.
+  // PIPELINED PHASES — each competitor flows research → verify independently, so
+  // verification of early finishers runs WHILE other competitors are still researching
+  // (the old hard barrier between the two waves cost ~1-1.5 min on a 5-competitor scan).
+  // Synthesis still waits for everything: the single Promise.all below is the only barrier.
+  // Concurrency math: research runs ALL competitors in one wave (see researchLimit
+  // below); verification is capped at 3 competitors (6 Haiku calls) so a 5-comp BU
+  // fact-checks its tail in one wave instead of queueing. Worst-case overlap ≈ 10 Sonnet
+  // + 11 Haiku — safe only because every call is now hard-capped server-side (12 turns,
+  // 230s abort), so no call can monopolize throughput the way the old 437s runaway did.
   const scanErrors=[];
   const results=new Array(comps.length).fill(null);
-  let failCount=0, rDone=0;
-  // Cap concurrent competitors at 3 → peak ≈ 3×3 = 9 web calls, not comps.length×3 (=15 for a
-  // 5-competitor BU). The heavier messaging call (homepage fetch + 2 searches) was losing a
-  // 15-way race against rate limits and timing out into an empty section; throttling fixes that.
-  const researchLimit=makeLimiter(3);
-  await Promise.all(comps.map((c,i)=>researchLimit(async()=>{
-    try{ results[i]=await research(c,bu); pcDone(c); }
-    catch(e){ console.error(c,e); pcFail(c,e.message); failCount++; scanErrors.push({competitor:c,phase:'Research',message:e.message||String(e)}); results[i]={competitor:c,momentum:'stable',positioning_moves:[],launches:[],messaging:[],summary:'Research failed: '+e.message.slice(0,60)}; }
-    rDone++; tick('Reading competitors…',`${rDone} of ${comps.length} filed`);
-  })));
+  let failCount=0, rDone=0, vDone=0;
+  // Single-wave research: all competitors at once (5-comp BU = 15 calls, 10 Sonnet +
+  // 5 Haiku) instead of two sequential waves — cuts ~2.5 min off D2C Core. This is only
+  // safe because the server now hard-caps every call (12 turns, 230s abort): the old
+  // runaway calls that made high concurrency dangerous can no longer pile up. If research
+  // calls start brushing their 210s timeout in the terminal log, drop this back to 3.
+  const researchLimit=makeLimiter(5);
+  const verifyLimit=makeLimiter(3);
+  const phaseTick=()=>{
+    if(VERIFY) tick('Researching & fact-checking…',`${rDone} of ${comps.length} researched · ${vDone} of ${comps.length} verified`);
+    else tick('Reading competitors…',`${rDone} of ${comps.length} filed`);
+  };
+  await Promise.all(comps.map((c,i)=>(async()=>{
+    let researched=false;
+    await researchLimit(async()=>{
+      try{ results[i]=await research(c,bu); pcDone(c); researched=true; }
+      catch(e){ console.error(c,e); pcFail(c,e.message); failCount++; scanErrors.push({competitor:c,phase:'Research',message:e.message||String(e)}); results[i]={competitor:c,momentum:'stable',positioning_moves:[],launches:[],messaging:[],summary:'Research failed: '+e.message.slice(0,60)}; }
+      rDone++; phaseTick();
+    });
+    if(!VERIFY) return;
+    if(!researched){ vDone++; phaseTick(); return; }   // failed research keeps its ✗ card; nothing to fact-check
+    await verifyLimit(async()=>{
+      const name=results[i].competitor||c;
+      pcStatus(name,'Fact-checking sources…');
+      try{ results[i]=await verify(name,results[i],bu); pcStatus(name,'✓ Verified'); }
+      catch(e){ console.error('verify',c,e); scanErrors.push({competitor:name,phase:'Verify',message:e.message||String(e)}); pcStatus(name,'✓ Filed'); }   // fail open — keep cards, just unflagged
+      vDone++; phaseTick();
+    });
+  })()));
 
   if(failCount===comps.length){
+    stopElapsed();
     H('ticker'); H('progGrid'); S('idleEl');
     showErr('Cannot reach the API','Every research call failed — check that the local server window is still open and your token is valid.');
     btn.disabled=false; btn.innerHTML='⟲ Run Briefing'; busy=false; if(scan) scan.classList.remove('go'); if(vToggle) vToggle.disabled=false; updateHistBtn(); return;
   }
-
-  if(VERIFY){
-    let vDone=0;
-    tick('Verifying sources…',`Fact-checking ${comps.length} competitors in parallel`); await raf();
-    const verifyLimit=makeLimiter(3);
-    await Promise.all(results.map((r,i)=>{
-      if(!r) return Promise.resolve();
-      return verifyLimit(async()=>{
-        try{ results[i]=await verify(r.competitor||comps[i],r,bu); }
-        catch(e){ console.error('verify',comps[i],e); scanErrors.push({competitor:r.competitor||comps[i],phase:'Verify',message:e.message||String(e)}); }   // fail open — keep cards, just unflagged
-        vDone++; tick('Verifying sources…',`${vDone} of ${comps.length} checked`);
-      });
-    }));
-  }
   const valid=results.filter(Boolean);
 
-  tick('Filing the verdict…','Opus is weighing positioning + launches into a PMM briefing'); await raf();
+  tick('Filing the verdict…','Opus is weighing positioning + launches into the briefing'); await raf();
   let synth={verdict:null,verdict_reason:'',competitors:[],brief:[],actions:[],biggest_moves:[]};
   try{ synth=await synthesize(valid,bu); }
   catch(e){ console.error('Synthesis:',e); showErr('Synthesis failed',(e.message||'')+'\nCompetitor cards are below.'); scanErrors.push({competitor:'Synthesis',phase:'Synthesis',message:e.message||String(e)}); }
@@ -1530,6 +1577,9 @@ async function run(){
     synth.competitors.forEach(c=>{ const r=valid.find(x=>(x.competitor||x.name)===c.name); if(r) c.threat=computeThreat(r); });
   }
 
+  stopElapsed();
+  // The banner stays on screen after the scan — pin the real duration next to the estimate.
+  el('bannerEl').textContent=banner+' · this scan: '+fmtClock(Math.floor((Date.now()-scanT0)/1000));
   H('ticker'); H('progGrid');
   const now=new Date();
   const timestamp=now.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' · '+now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});

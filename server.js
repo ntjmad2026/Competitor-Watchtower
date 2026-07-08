@@ -26,6 +26,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 try { process.loadEnvFile(path.join(__dirname, '.env')); } catch { /* no .env */ }
 
 const PORT = process.env.PORT || 8787;
+let REQ_SEQ = 0; // per-boot API call counter, used by the terminal narration below
 const HTML_FILE = path.join(__dirname, 'watchtower.html');
 const CONTEXT_FILE = path.join(__dirname, 'nt-context.js');
 
@@ -87,9 +88,20 @@ async function runAgent(body) {
     allowedTools: wantsWebSearch ? ['WebSearch', 'WebFetch'] : [],
     permissionMode: 'bypassPermissions',
     settingSources: [],            // isolation: ignore ~/.claude + project settings/CLAUDE.md
-    maxTurns: wantsWebSearch ? 40 : 2,
+    // Every scan prompt locks its query count (research: 2 searches, messaging: fetch + 2,
+    // verify: 3-search budget), so 12 turns is generous headroom. The old cap of 40 let a
+    // wandering call run 15+ searches — one was observed at 437s, monopolizing rate-limit
+    // capacity and slowing every sibling call in the scan.
+    maxTurns: wantsWebSearch ? 12 : 2,
   };
   if (thinking && thinking.budget_tokens) options.maxThinkingTokens = thinking.budget_tokens;
+
+  // Hard server-side deadline. The dashboard abandons a call at 210s, but without an
+  // abort the SDK kept working the dead request (the 437s call above) — wasted tokens
+  // and stolen throughput. 230s = the longest client timeout plus grace.
+  const ac = new AbortController();
+  options.abortController = ac;
+  const deadline = setTimeout(() => ac.abort(), 230000);
 
   let stderr = '';
   options.stderr = d => { stderr += d; };
@@ -112,6 +124,7 @@ async function runAgent(body) {
       }
     }
   } catch (e) {
+    if (ac.signal.aborted) throw new Error('Call exceeded the 230s server deadline and was aborted.');
     // Surface the most informative diagnostic we captured, not the opaque
     // "process exited" message. The web-search server tool can fail this way.
     const detail = lastResult || assistantErr || stderr.slice(-400) || e.message;
@@ -119,6 +132,8 @@ async function runAgent(body) {
       ? ' (web-search step failed at the API layer — see README troubleshooting)'
       : '';
     throw new Error(detail + hint);
+  } finally {
+    clearTimeout(deadline);
   }
   // A "success" result can still wrap an upstream API error in its text.
   if (/^API Error:/.test(finalText)) throw new Error(finalText);
@@ -270,11 +285,20 @@ const server = http.createServer((req, res) => {
     let body = '';
     req.on('data', c => { body += c; });
     req.on('end', async () => {
+      let q = {};
+      try { q = JSON.parse(body || '{}'); } catch { /* runAgent surfaces bad shapes */ }
+      // Narrate every call in this terminal — metadata only, never prompt content or
+      // credentials — so a 5-7 minute scan is visibly alive from the server window too.
+      const id = ++REQ_SEQ, t0 = Date.now();
+      const kind = Array.isArray(q.tools) && q.tools.length ? 'web search' : 'direct';
+      console.log(`  → [${new Date().toLocaleTimeString()}] call #${id} started · ${q.model || 'model?'} · ${kind}`);
       try {
-        const reply = await runAgent(JSON.parse(body || '{}'));
+        const reply = await runAgent(q);
+        console.log(`  ✓ call #${id} finished in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(reply));
       } catch (err) {
+        console.log(`  ✗ call #${id} failed after ${((Date.now() - t0) / 1000).toFixed(1)}s · ${String((err && err.message) || err).slice(0, 90)}`);
         res.writeHead(500, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: { type: 'proxy_error', message: String(err && err.message || err) } }));
       }

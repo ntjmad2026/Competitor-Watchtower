@@ -53,7 +53,7 @@ function loadApp() {
     const navigator={clipboard:{writeText(){}}};
     const requestAnimationFrame=cb=>{ if(cb) cb(); return 0; };
   `;
-  const exports = 'return {BUS,COMP,SEARCH_SITE,COMP_LOGO_DOMAIN,SEARCH_QUALIFIER,COMP_DOMAINS,buildQueries,dayNum,recencyTier,withinWeek,withinWindow,itemScore,computeThreat,computeBiggestMoves,headlineOverlap,safeJSON,slug};';
+  const exports = 'return {BUS,COMP,SEARCH_SITE,COMP_LOGO_DOMAIN,SEARCH_QUALIFIER,COMP_DOMAINS,buildQueries,dayNum,recencyTier,withinWeek,withinWindow,itemScore,computeThreat,computeBiggestMoves,headlineOverlap,safeJSON,slug,linkifyBullet,stripMarkers};';
   // eslint-disable-next-line no-new-func
   return new Function(stubs + '\n' + body + '\n' + exports)();
 }
@@ -132,6 +132,16 @@ ok(leadBm.length === 1 && leadBm[0].headline === 'fresh-5d', 'Lead Signal pool i
 ok(/LEAD_DAYS=10/.test(HTML), 'LEAD_DAYS constant is present and set to 10 (matches the README\'s "last 10 days")');
 const unvBm = app.computeBiggestMoves([{ competitor: 'X', positioning_moves: [{ title: 'u', summary: 's', significance: 3, futures_relevance: 'high', date: day(-1), _v: 'unverified' }], launches: [] }], []);
 ok(unvBm[0] && unvBm[0]._v === 'unverified', 'verification status (_v) travels through biggest-move selection to the spotlight');
+const urlBm = app.computeBiggestMoves([{ competitor: 'X', positioning_moves: [{ title: 'linked', summary: 's', significance: 3, futures_relevance: 'high', date: day(-1), url: 'https://example.com/a' }], launches: [{ name: 'launch-linked', summary: 's', significance_score: 2, futures_relevance: 'high', date: day(-2), url: 'https://example.com/b' }] }], []);
+ok(urlBm[0] && urlBm[0].url === 'https://example.com/a' && urlBm[1] && urlBm[1].url === 'https://example.com/b', 'source URLs travel through biggest-move selection (spotlight + Biggest Moves render live links)');
+
+// ── 3d. TL;DR SOURCE LINKS — [[url|phrase]] markers link straight to the cited source. ──
+section('TL;DR source links');
+const bullet = app.linkifyBullet('Robinhood opened its [[https://example.com/beta|Agentic beta]] this week');
+ok(bullet.includes('href="https://example.com/beta"') && bullet.includes('xlink'), 'a URL marker renders as a direct external source link');
+ok(app.linkifyBullet('shift in [[messaging|homepage tone]]').includes("jumpToDD('dd-msg')"), 'legacy section markers (older saved briefings) still jump to their section');
+ok(app.linkifyBullet('try [[javascript:alert(1)|this]] now') === 'try this now', 'non-http marker targets render as plain text — no unsafe or dead links');
+ok(app.stripMarkers('x [[https://example.com/beta|Agentic beta]] y') === 'x Agentic beta y', 'stripMarkers removes URL markers for model-facing contexts');
 ok(/spotBadge/.test(HTML), 'the spotlight template renders an unverified badge (spotBadge) for unconfirmed lead moves');
 ok(/positioning_moves:\(r\.positioning_moves\|\|\[\]\)\.slice\(0,5\)/.test(HTML) && /launches:\(r\.launches\|\|\[\]\)\.slice\(0,5\)/.test(HTML), 'saveHistory keeps 5 positioning/launches (same as the live cap — a reopened briefing keeps the same lead signal)');
 
@@ -147,6 +157,30 @@ ok(/mode:\s*0o600/.test(SRV), '.env is written with owner-only permissions');
 ok(/sk-ant-\[A-Za-z0-9_-\]/.test(SRV), 'tokens are format-checked before any live validation');
 ok(!/console\.(log|warn|error)\([^)]*\$\{token/.test(SRV), 'the token value is never interpolated into a log line');
 ok(/url === '\/setup'/.test(SRV), '/setup re-opens the page for token rotation');
+
+// ── 3d. LIVE-PROGRESS GUARDS — a 5-7 minute scan must visibly move on both
+//        surfaces (browser + server terminal) or users read it as a timeout. ──
+section('Live progress');
+ok(/id="tickerElapsed"/.test(HTML), 'the ticker has an elapsed-time element');
+ok(/setInterval\(paintElapsed,1000\)/.test(HTML), 'the elapsed clock ticks every second during a scan');
+ok(/stopElapsed\(\)/.test(HTML), 'the elapsed clock is stopped on scan exit paths');
+ok(/track\(researchPositioning/.test(HTML) && /track\(researchMessaging/.test(HTML), 'per-category marks flip on each competitor card as research calls land');
+ok(/Fact-checking sources…/.test(HTML), 'cards show verify-phase status, not a stale done-mark');
+ok(/Researching & fact-checking…/.test(HTML) && /verifyLimit=makeLimiter\(3\)/.test(HTML), 'research and verification are PIPELINED per competitor (verify starts as each research finishes), with verify capped at 3 concurrent');
+ok(/SEARCH BUDGET \(hard limit\): at most 3 web searches TOTAL/.test(HTML), 'the verifier has a hard 3-search budget — 5-claim groups cannot run 5 sequential searches into the timeout');
+ok(/maxTurns: wantsWebSearch \? 12 : 2/.test(SRV), 'web-search calls are capped at 12 turns — a wandering call cannot run 15+ searches (the 437s runaway)');
+ok(/options\.abortController = ac/.test(SRV) && /230000/.test(SRV), 'every call has a 230s server-side abort — the SDK cannot keep working a request the browser already abandoned');
+ok(/this scan: '\+fmtClock/.test(HTML), 'the finished briefing pins the real scan duration next to the time estimate in the banner');
+ok(/call #\$\{id\} started/.test(SRV) && /finished in/.test(SRV), 'the server terminal narrates each API call with its duration');
+
+// ── 3e. MODEL-ASSIGNMENT GUARDS — deliberate speed tuning (July 2026). Verification
+//        and messaging run on Haiku by design; positioning/launches judgment stays on
+//        Sonnet; synthesis prose stays on Opus with a trimmed thinking budget. ──
+section('Model assignment (scan-speed tuning)');
+ok(/claude-haiku-4-5[^']*',max_tokens:900,system:VERIFIER_SYS/.test(HTML), 'verification runs on Haiku (narrow fail-open task, 10 calls per 5-comp scan)');
+ok(/claude-haiku-4-5[^']*',max_tokens:600,system:RESEARCH_SYS/.test(HTML), 'messaging research runs on Haiku (simplest extraction, concurrency-sensitive)');
+ok((HTML.match(/claude-sonnet-4-6',max_tokens:900,system:RESEARCH_SYS/g)||[]).length===2, 'positioning + launches research stay on Sonnet (date discipline + significance scoring)');
+ok(/claude-opus-4-8/.test(HTML) && /budget_tokens:1500/.test(HTML), 'synthesis stays on Opus with the trimmed 1500-token thinking budget');
 
 // ── 4. JSON REPAIR ───────────────────────────────────────────────────────────
 section('safeJSON model-output repair');
