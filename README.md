@@ -40,7 +40,7 @@ Setup takes about 15 minutes, once. After that, using the tool is a double-click
 
 ## Setup — do this once, in this order
 
-**Step 1 — Download the folder/Consider watching this video walkthrough: https://www.loom.com/share/6a9fe7001a7340d1bf0f3de8edaa3a0b**
+**Step 1 — Download the folder/Consider watching this video walkthrough for less technical people: https://www.loom.com/share/6a9fe7001a7340d1bf0f3de8edaa3a0b**
 
 On this page, click the green **Code** button → **Download ZIP**, then double-click the ZIP to unzip it. Put the folder anywhere you like, such as your Desktop.
 
