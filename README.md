@@ -46,8 +46,9 @@ A token is what connects the tool to your Claude account. Getting one takes abou
 
 Open Terminal (`Cmd + Space`, type `Terminal`, hit Enter) and run these two lines:
 ```
-npm install -g @anthropic-ai/claude-code
+sudo npm install -g @anthropic-ai/claude-code
 ```
+The first line asks for your **Mac login password** — typing is invisible, that's normal. Hit Enter after typing it.
 ```
 claude setup-token
 ```
