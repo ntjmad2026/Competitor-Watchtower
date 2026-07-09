@@ -40,7 +40,11 @@ You need a Claude Pro or Team subscription at [claude.ai](https://claude.ai). Th
 
 ### 2. Your personal Claude token
 
-A token is what connects the tool to your Claude account. Getting one takes about 2 minutes, one time. Open Terminal (`Cmd + Space`, type `Terminal`, hit Enter) and run these two lines:
+A token is what connects the tool to your Claude account. Getting one takes about 2 minutes, one time.
+
+> **Easiest order: do Setup Step 2 first.** The token commands below need Node.js, and the launcher in Setup Step 2 installs it for you. Run the launcher, and when the setup page asks for your token, come back here — the same instructions appear on that page. (If Terminal ever says `command not found: npm`, that's the sign Node.js isn't installed yet.)
+
+Open Terminal (`Cmd + Space`, type `Terminal`, hit Enter) and run these two lines:
 ```
 npm install -g @anthropic-ai/claude-code
 ```
@@ -115,6 +119,9 @@ Close the launcher window (or press `Control + C` in it). Next time, just double
 ---
 
 ## Troubleshooting
+
+**Terminal says `command not found: npm`**
+Node.js isn't installed yet — `npm` comes with it. Easiest fix: double-click `Start Watchtower.command`, which walks you through installing Node. Or install it directly: download the **LTS** version from [nodejs.org](https://nodejs.org), run the installer with default options, then fully quit and reopen Terminal and try again.
 
 **The page won't load / "Cannot connect"**
 The server isn't running. Double-click `Start Watchtower.command`.
