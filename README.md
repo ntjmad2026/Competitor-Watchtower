@@ -30,60 +30,57 @@ Briefings are saved locally so you can reopen any past scan instantly without re
 
 ---
 
-## Before you start — what you need
+## Before you start — the one thing you need
 
-Just two things. The launcher handles everything else (installing dependencies, starting the server, opening your browser) by itself.
+A **Claude Pro or Team subscription** at [claude.ai](https://claude.ai). That's it. The AI research runs through your own Claude account (no separate API costs), and the launcher installs everything else itself.
 
-### 1. A Claude account
-
-You need a Claude Pro or Team subscription at [claude.ai](https://claude.ai). This is what powers the AI research. The tool runs all searches through your Claude account, so there are no separate API costs or usage fees beyond your existing subscription.
-
-### 2. Your personal Claude token
-
-A token is what connects the tool to your Claude account. Getting one takes about 2 minutes, one time.
-
-> **Easiest order: do Setup Step 2 first.** The token commands below need Node.js, and the launcher in Setup Step 2 installs it for you. Run the launcher, and when the setup page asks for your token, come back here — the same instructions appear on that page. (If Terminal ever says `command not found: npm`, that's the sign Node.js isn't installed yet.)
-
-Open Terminal (`Cmd + Space`, type `Terminal`, hit Enter) and run these two lines:
-```
-sudo npm install -g @anthropic-ai/claude-code
-```
-The first line asks for your **Mac login password** — typing is invisible, that's normal. Hit Enter after typing it.
-```
-claude setup-token
-```
-
-A browser window will ask you to log in to Claude. After you approve, Terminal prints your token — a long string starting with `sk-ant`. **Copy it.** You'll paste it into the setup page in a moment. (These same instructions appear on the setup page itself, so you can also just start the tool and follow along there.)
-
-> **Security rule:** Never share your token with anyone, paste it into Slack, or send it over email. It is tied to your personal Claude account. If you think it's been exposed, run `claude setup-token` again for a fresh one.
+Setup takes about 15 minutes, once. After that, using the tool is a double-click.
 
 ---
 
-## Setup — do this once
+## Setup — do this once, in this order
 
-**Step 1 — Get the Watchtower folder**
+**Step 1 — Download the folder**
 
-You'll receive the project as a folder (or a zip — double-click to unzip). Put it anywhere you like, such as your Desktop.
+On this page, click the green **Code** button → **Download ZIP**, then double-click the ZIP to unzip it. Put the folder anywhere you like, such as your Desktop.
 
-*Comfortable with git? You can clone it instead:* `git clone https://github.com/ntjmad2026/Competitor-Watchtower.git`
+*Comfortable with git? `git clone https://github.com/ntjmad2026/Competitor-Watchtower.git` works too.*
 
-**Step 2 — Double-click `Start Watchtower.command`**
+**Step 2 — Open `Start Watchtower.command` (and get past the macOS warning)**
 
-The first time, macOS will warn that it "could not verify" the file — that's normal for anything downloaded from the internet. The 30-second fix, once only:
+Double-click `Start Watchtower.command` inside the folder. The first time, macOS warns it "could not verify" the file — that's normal for anything downloaded from the internet. The once-only fix:
 
 1. Click **Done** on the warning (not "Move to Trash")
-2. Open **System Settings → Privacy & Security**, scroll down to the Security section
-3. Next to *"Start Watchtower.command" was blocked*, click **Open Anyway** and confirm
+2. Open **System Settings → Privacy & Security** and scroll down to the Security section
+3. Click **Open Anyway** next to the blocked-file message, and confirm
 4. Double-click the file again — it runs, and macOS never asks about it again
 
-The launcher takes it from there:
-- If Node.js (the engine the server runs on) is missing, it opens the download page and tells you exactly what to click — install it, then double-click the launcher again.
-- It installs the project's dependencies automatically (about a minute; text will scroll by — that's normal).
-- Then it opens the Watchtower in your browser.
+**Step 3 — Let the launcher install what it needs**
 
-**Step 3 — Paste your token**
+- If Node.js (the engine the server runs on) is missing, the launcher opens the download page for you: click the green **LTS** button, run the installer with the default options, then double-click `Start Watchtower.command` again.
+- It then installs the project's dependencies by itself (about a minute — text scrolling by is normal) and opens the Watchtower in your browser.
 
-The first page you see asks for your Claude token. Paste it and click **Save and open the dashboard**. The tool checks the token with Claude right then — if it's good, you land in the dashboard; if not, you get a plain-English message telling you what to fix. That's the whole setup. You never do this again.
+Your browser will show a **setup page** asking for your Claude token. That's your cue for Step 4.
+
+**Step 4 — Get your Claude token (one time, about 2 minutes)**
+
+Open Terminal (`Cmd + Space`, type `Terminal`, hit Enter) and run these two lines, one at a time:
+```
+sudo npm install -g @anthropic-ai/claude-code
+```
+This asks for your **Mac login password** — the typing is invisible, that's normal. Type it and hit Enter. Then:
+```
+claude setup-token
+```
+A browser window asks you to log in to Claude. After you approve, Terminal prints your token — a long string starting with `sk-ant`. **Copy it.**
+
+> **Security rule:** your token is tied to your personal Claude account. Never share it, paste it into Slack, or send it over email. If you think it's been exposed, run `claude setup-token` again for a fresh one.
+
+**Step 5 — Paste the token**
+
+Back on the setup page, paste the token and click **Save and open the dashboard**. The tool verifies it with Claude on the spot — a good token lands you in the dashboard; a bad paste gets a plain-English message saying what to fix.
+
+That's the whole setup. You never do any of this again.
 
 ---
 
@@ -122,7 +119,7 @@ Close the launcher window (or press `Control + C` in it). Next time, just double
 ## Troubleshooting
 
 **Terminal says `command not found: npm`**
-Node.js isn't installed yet — `npm` comes with it. Easiest fix: double-click `Start Watchtower.command`, which walks you through installing Node. Or install it directly: download the **LTS** version from [nodejs.org](https://nodejs.org), run the installer with default options, then fully quit and reopen Terminal and try again.
+You've jumped to Step 4 before Steps 2–3 — Node.js isn't installed yet (`npm` comes with it). Double-click `Start Watchtower.command` first; it walks you through installing Node. Then retry the token commands.
 
 **The page won't load / "Cannot connect"**
 The server isn't running. Double-click `Start Watchtower.command`.
@@ -145,13 +142,11 @@ This always happens on the first open of a downloaded copy — it's macOS being 
 
 ---
 
-## How to keep the tool current
+## How the tool stays current
 
-The tool's knowledge of NinjaTrader's own products, pricing, and roadmap lives in a file called `nt-context.js`. Claude compares competitors against this baseline, so it needs to stay accurate.
+The tool compares competitors against a description of NinjaTrader in `nt-context.js`. That file is deliberately **evergreen** — it covers who NT is and what it durably ships, with no launch dates or roadmap specifics, so it cannot silently go stale. Anything time-sensitive comes from the live web research in each scan instead.
 
-**Refresh it roughly once a month.** To do this, open a Claude Code session connected to NinjaTrader Confluence and ask Claude to update `nt-context.js` with the latest product, pricing, roadmap, and GTM information from the DPM, DM, and IL spaces. Commit and push the updated file, everyone on the team gets the update automatically the next time they run `git pull`.
-
-The date of the last refresh is noted at the top of `nt-context.js`. If it's more than 6 weeks old, the tool may compare competitors against outdated NT information.
+It only needs a review when something identity-level changes — an acquisition, a brand-new product category, a pricing-model restructure — roughly once or twice a year. The last review date is stamped at the top of the file. To update it: edit the file (it's plain text) or ask a Claude session to revise it, run `npm test` to confirm the built-in fact guards still pass, then commit and push — teammates get it on their next `git pull`.
 
 ---
 
@@ -162,7 +157,7 @@ The date of the last refresh is noted at the top of `nt-context.js`. If it's mor
 | `Start Watchtower.command` | The one-click launcher — installs what's needed and starts everything |
 | `watchtower.html` | The entire dashboard — UI, research logic, and scoring in one file |
 | `server.js` | The local server that handles Claude API calls and the first-run setup page |
-| `nt-context.js` | NinjaTrader product and pricing context — update this monthly |
+| `nt-context.js` | Evergreen NinjaTrader context — needs review only when identity-level facts change |
 | `package.json` | Project configuration and dependency list |
 | `.gitignore` | Tells git to never upload your `.env` file or `node_modules/` folder |
 | `.env` | **Never share or upload your personal credentials** (the setup page creates this for you) |
